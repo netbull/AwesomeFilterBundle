@@ -1,4 +1,4 @@
-FoundationEmailsBundle
+AwesomeFilterBundle
 ==========
 
 Installation
@@ -10,7 +10,7 @@ Applications that use Symfony Flex
 Open a command console, enter your project directory and execute:
 
 ```console
-$ composer require netbull/foundation-emails-bundle
+$ composer require netbull/awesome-filter-bundle
 ```
 
 Applications that don't use Symfony Flex
@@ -45,7 +45,7 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             // ...
-            new NetBull\FoundationEmailsBundle\NetBullFoundationEmailsBundle(),
+            new NetBull\AwesomeFilterBundle\NetBullAwesomeFilterBundle(),
         );
 
         // ...
