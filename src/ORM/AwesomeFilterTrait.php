@@ -15,7 +15,7 @@ trait AwesomeFilterTrait
      * @param QueryBuilder $qb
      * @param array $params
      */
-    public function addFilters(QueryBuilder $qb, array $params)
+    public function addFilters(QueryBuilder $qb, array $params): void
     {
         foreach ($params as $i => $filter) {
             if (!isset($filter['field']) || !isset($filter['operator'])) {
