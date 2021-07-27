@@ -1,0 +1,24 @@
+{
+    "name": "netbull/awesome-filter-bundle",
+    "description": "Awesome Filter Bundle",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Aleksandar Dimitrov",
+            "email": "netbull2007@gmail.com"
+        }
+    ],
+    "keywords": [
+        "netbull awesome filter symfony bundle"
+    ],
+    "license": "AGPL-3.0-or-later",
+    "require": {
+        "php": "^7.4",
+        "doctrine/doctrine-bundle": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "NetBull\\AwesomeFilterBundle\\": "src/"
+        }
+    }
+}
