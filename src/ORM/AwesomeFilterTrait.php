@@ -3,6 +3,7 @@
 namespace NetBull\AwesomeFilterBundle\ORM;
 
 use Doctrine\ORM\QueryBuilder;
+use InvalidArgumentException;
 use NetBull\AwesomeFilterBundle\Constants\AwesomeFilterConstants;
 
 /**
@@ -23,7 +24,7 @@ trait AwesomeFilterTrait
             }
 
             try {
-                $column = $this->getColumnNameByField($filter['field']);
+                $column = $this->getColumnNameByField($filter['field'], $filter);
                 $this->addFilter($qb, $i, $filter['operator'], $column, $filter['value']);
             } catch (InvalidArgumentException $e) {}
         }
@@ -34,10 +35,10 @@ trait AwesomeFilterTrait
      * @param int $index
      * @param string $operator
      * @param string $column
-     * @param string|null $value
+     * @param array|string|null $value
      * @throws InvalidArgumentException
      */
-    public function addFilter(QueryBuilder $qb, int $index, string $operator, string $column, ?string $value): void
+    public function addFilter(QueryBuilder $qb, int $index, string $operator, string $column, $value): void
     {
         $parameterName = 'param_'.$index;
         $parameters = [ $parameterName => $value ];
@@ -83,6 +84,14 @@ trait AwesomeFilterTrait
             case AwesomeFilterConstants::OPERATOR_ENDS['value']:
                 $qb->andWhere($qb->expr()->like($column, ':'.$parameterName));
                 $parameters[$parameterName] = "%$value";
+                break;
+            case AwesomeFilterConstants::OPERATOR_IS_IN['value']:
+                $qb->andWhere($qb->expr()->in($column, ':'.$parameterName));
+                $parameters[$parameterName] = $value;
+                break;
+            case AwesomeFilterConstants::OPERATOR_IS_NOT_IN['value']:
+                $qb->andWhere($qb->expr()->notIn($column, ':'.$parameterName));
+                $parameters[$parameterName] = $value;
                 break;
             default:
                 throw new InvalidArgumentException("Operator \"$operator\" is not defined.");

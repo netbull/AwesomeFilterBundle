@@ -12,10 +12,11 @@ interface AwesomeFilterInterface
 {
     /**
      * @param string $field
+     * @param array $params
      * @return string
      * @throws InvalidArgumentException
      */
-    public function getColumnNameByField(string $field): string;
+    public function getColumnNameByField(string $field, array $params): string;
 
     /**
      * @param QueryBuilder $qb
