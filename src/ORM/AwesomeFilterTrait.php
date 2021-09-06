@@ -5,6 +5,7 @@ namespace NetBull\AwesomeFilterBundle\ORM;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use NetBull\AwesomeFilterBundle\Constants\AwesomeFilterConstants;
+use NetBull\AwesomeFilterBundle\Operators;
 
 /**
  * Trait AwesomeFilterTrait
@@ -43,17 +44,17 @@ trait AwesomeFilterTrait
         $parameterName = 'param_'.$index;
         $parameters = [ $parameterName => $value ];
         switch ($operator) {
-            case AwesomeFilterConstants::OPERATOR_IS['value']:
+            case Operators\Is::TYPE:
                 $qb->andWhere($qb->expr()->eq($column, ':'.$parameterName));
                 break;
-            case AwesomeFilterConstants::OPERATOR_IS_NOT['value']:
+            case Operators\IsNot::TYPE:
                 $qb->andWhere($qb->expr()->neq($column, ':'.$parameterName));
                 break;
-            case AwesomeFilterConstants::OPERATOR_IS_EMPTY['value']:
+            case Operators\IsEmpty::TYPE:
                 $parameters = [];
                 $qb->andWhere($qb->expr()->isNull($column));
                 break;
-            case AwesomeFilterConstants::OPERATOR_IS_BETWEEN['value']:
+            case Operators\IsBetween::TYPE:
                 $parts = explode('|', $value);
                 $parameters = [
                     'param_'.$index.'_0' => $parts[0],
@@ -61,35 +62,35 @@ trait AwesomeFilterTrait
                 ];
                 $qb->andWhere($qb->expr()->between($column, ':param_'.$index.'_0', ':param_'.$index.'_1'));
                 break;
-            case AwesomeFilterConstants::OPERATOR_GT['value']:
+            case Operators\Gt::TYPE:
                 $qb->andWhere($qb->expr()->gt($column, ':'.$parameterName));
                 break;
-            case AwesomeFilterConstants::OPERATOR_GTE['value']:
+            case Operators\Gte::TYPE:
                 $qb->andWhere($qb->expr()->gte($column, ':'.$parameterName));
                 break;
-            case AwesomeFilterConstants::OPERATOR_LT['value']:
+            case Operators\Lt::TYPE:
                 $qb->andWhere($qb->expr()->lt($column, ':'.$parameterName));
                 break;
-            case AwesomeFilterConstants::OPERATOR_LTE['value']:
+            case Operators\Lte::TYPE:
                 $qb->andWhere($qb->expr()->lte($column, ':'.$parameterName));
                 break;
-            case AwesomeFilterConstants::OPERATOR_CONTAINS['value']:
+            case Operators\Contains::TYPE:
                 $qb->andWhere($qb->expr()->like($column, ':'.$parameterName));
                 $parameters[$parameterName] = "%$value%";
                 break;
-            case AwesomeFilterConstants::OPERATOR_STARTS['value']:
+            case Operators\Starts::TYPE:
                 $qb->andWhere($qb->expr()->like($column, ':'.$parameterName));
                 $parameters[$parameterName] = "$value%";
                 break;
-            case AwesomeFilterConstants::OPERATOR_ENDS['value']:
+            case Operators\Ends::TYPE:
                 $qb->andWhere($qb->expr()->like($column, ':'.$parameterName));
                 $parameters[$parameterName] = "%$value";
                 break;
-            case AwesomeFilterConstants::OPERATOR_IS_IN['value']:
+            case Operators\IsIn::TYPE:
                 $qb->andWhere($qb->expr()->in($column, ':'.$parameterName));
                 $parameters[$parameterName] = $value;
                 break;
-            case AwesomeFilterConstants::OPERATOR_IS_NOT_IN['value']:
+            case Operators\IsNotIn::TYPE:
                 $qb->andWhere($qb->expr()->notIn($column, ':'.$parameterName));
                 $parameters[$parameterName] = $value;
                 break;
