@@ -13,4 +13,5 @@ class FieldConstants
     const TYPE_SELECT = 'Select';
     const TYPE_TEXT = 'Text';
     const TYPE_TIME = 'Time';
+    const TYPE_NUMBER = 'Number';
 }
