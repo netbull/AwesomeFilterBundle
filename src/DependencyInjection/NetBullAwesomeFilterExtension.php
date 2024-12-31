@@ -2,6 +2,7 @@
 
 namespace NetBull\AwesomeFilterBundle\DependencyInjection;
 
+use NetBull\AwesomeFilterBundle\DependencyInjection\Compiler\OperatorPass;
 use Exception;
 use NetBull\AwesomeFilterBundle\Operators\OperatorInterface;
 use Symfony\Component\Config\FileLocator;
@@ -25,11 +26,6 @@ class NetBullAwesomeFilterExtension extends Extension
         $loader->load('services.yaml');
 
         $container->registerForAutoconfiguration(OperatorInterface::class)
-            ->addTag('awesome_filter.operator');
-
-		$managerDefinition = $container->getDefinition(AwesomeFilterManager::class);
-		foreach ($container->findTaggedServiceIds('awesome_filter.operator') as $name => $exporter) {
-            $managerDefinition->addMethodCall('addOperator', [new Reference($name)]);
-		}
+            ->addTag(OperatorPass::OPERATOR_TAG);
     }
 }
