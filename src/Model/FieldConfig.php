@@ -63,9 +63,9 @@ class FieldConfig
     private bool $required = false;
 
     /**
-     * @var int what position is in the output
+     * @var int|null what position is in the output
      */
-    private int $position = 0;
+    private ?int $position = null;
 
     /**
      * @return string|null
@@ -296,18 +296,18 @@ class FieldConfig
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosition(): int
+    public function getPosition(): ?int
     {
         return $this->position;
     }
 
     /**
-     * @param int $position
+     * @param int|null $position
      * @return $this
      */
-    public function setPosition(int $position): self
+    public function setPosition(?int $position): self
     {
         $this->position = $position;
         return $this;

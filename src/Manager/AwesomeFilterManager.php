@@ -8,6 +8,11 @@ use NetBull\AwesomeFilterBundle\Operators\OperatorInterface;
 class AwesomeFilterManager
 {
     /**
+     * @var bool
+     */
+    private bool $automaticallyAdjustPosition = false;
+
+    /**
      * @var array
      */
     private array $operators = [];
@@ -54,9 +59,11 @@ class AwesomeFilterManager
      */
     public function setFieldConfigs(array $fieldConfigs): self
     {
-        foreach ($fieldConfigs as $i => $fieldConfig) {
-            $fieldConfig->setPosition($i);
-            $this->fieldConfigs[$fieldConfig->getName()] = $fieldConfig;
+        $this->shouldAutomaticallyAdjustPositions($fieldConfigs);
+
+        $this->fieldConfigs = [];
+        foreach ($fieldConfigs as $fieldConfig) {
+            $this->addFieldConfig($fieldConfig->getName(), $fieldConfig);
         }
 
         return $this;
@@ -77,6 +84,9 @@ class AwesomeFilterManager
      */
     public function addFieldConfig(string $name, FieldConfig $fieldConfig): self
     {
+        if ($this->automaticallyAdjustPosition) {
+            $fieldConfig->setPosition(sizeof($this->fieldConfigs));
+        }
         $this->fieldConfigs[$name] = $fieldConfig;
 
         return $this;
@@ -114,6 +124,23 @@ class AwesomeFilterManager
         });
 
         return $this->fieldConfigs;
+    }
+
+    /**
+     * @param array $fieldConfigs
+     * @return bool
+     */
+    private function shouldAutomaticallyAdjustPositions(array $fieldConfigs): bool
+    {
+        $autoSetPositions = false;
+        foreach ($fieldConfigs as $fieldConfig) {
+            if (null === $fieldConfig->getPosition()) {
+                $autoSetPositions = true;
+                break;
+            }
+        }
+
+        return $autoSetPositions;
     }
 
     /**

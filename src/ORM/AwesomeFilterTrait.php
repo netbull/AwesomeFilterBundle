@@ -4,7 +4,6 @@ namespace NetBull\AwesomeFilterBundle\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
-use NetBull\AwesomeFilterBundle\Constants\AwesomeFilterConstants;
 use NetBull\AwesomeFilterBundle\Operators;
 
 trait AwesomeFilterTrait
