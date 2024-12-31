@@ -2,6 +2,8 @@
 
 namespace NetBull\AwesomeFilterBundle\Model;
 
+use LogicException;
+
 class FieldConfigsChain
 {
     /**
@@ -39,16 +41,19 @@ class FieldConfigsChain
     }
 
     /**
-     * @param string $name
      * @param FieldConfig $fieldConfig
      * @return $this
      */
-    public function addFieldConfig(string $name, FieldConfig $fieldConfig): self
+    public function addFieldConfig(FieldConfig $fieldConfig): self
     {
+        if (!$fieldConfig->getName()) {
+            throw new LogicException('FieldConfig name must be defined');
+        }
+
         if ($this->automaticallyAdjustPosition) {
             $fieldConfig->setPosition(sizeof($this->fieldConfigs));
         }
-        $this->fieldConfigs[$name] = $fieldConfig;
+        $this->fieldConfigs[$fieldConfig->getName()] = $fieldConfig;
 
         return $this;
     }
