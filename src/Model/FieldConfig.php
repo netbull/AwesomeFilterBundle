@@ -77,10 +77,12 @@ class FieldConfig
 
     /**
      * @param string|null $name
+     * @return $this
      */
-    public function setName(?string $name): void
+    public function setName(?string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
