@@ -9,7 +9,7 @@ class AwesomeFilterManager
     /**
      * @var array
      */
-    private array $fieldConfigs = [];
+    private array $operators = [];
 
     /**
      * @param OperatorInterface $operator

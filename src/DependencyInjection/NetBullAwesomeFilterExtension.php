@@ -24,8 +24,5 @@ class NetBullAwesomeFilterExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
-
-        $container->registerForAutoconfiguration(OperatorInterface::class)
-            ->addTag(OperatorPass::OPERATOR_TAG);
     }
 }
