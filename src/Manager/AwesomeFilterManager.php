@@ -12,12 +12,15 @@ class AwesomeFilterManager
     private array $operators = [];
 
     /**
-     * @param OperatorInterface $operator
+     * @param $operator
      * @return $this
      */
-    public function addOperator(OperatorInterface $operator): self
+    public function addOperator($operator): self
     {
-        $this->operators[$operator->getValue()] = $operator;
+        if ($operator instanceof OperatorInterface) {
+            $this->operators[$operator->getValue()] = $operator;
+        }
+
         return $this;
     }
 

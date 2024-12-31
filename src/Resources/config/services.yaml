@@ -1,2 +1,6 @@
 services:
     NetBull\AwesomeFilterBundle\Manager\AwesomeFilterManager:
+
+    NetBull\AwesomeFilterBundle\Operators\:
+        resource: '../../Operators/'
+        tags: [ 'awesome_filter.operator' ]
