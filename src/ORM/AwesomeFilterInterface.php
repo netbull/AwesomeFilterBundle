@@ -4,10 +4,6 @@ namespace NetBull\AwesomeFilterBundle\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 
-/**
- * Interface AwesomeFilterInterface
- * @package NetBull\AwesomeFilterBundle\ORM
- */
 interface AwesomeFilterInterface
 {
     /**

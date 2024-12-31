@@ -10,6 +10,11 @@ class FieldConfig
     /**
      * @var string|null
      */
+    private ?string $name;
+
+    /**
+     * @var string|null
+     */
     private ?string $label;
 
     /**
@@ -43,12 +48,12 @@ class FieldConfig
     private bool $available = true;
 
     /**
-     * @var bool Shoud this field be used for filtering
+     * @var bool Should this field be used for filtering
      */
     private bool $filterable = true;
 
     /**
-     * @var bool Shoud this field be used for sorting
+     * @var bool Should this field be used for sorting
      */
     private bool $sortable = true;
 
@@ -56,6 +61,27 @@ class FieldConfig
      * @var bool Is this field required
      */
     private bool $required = false;
+
+    /**
+     * @var int what position is in the output
+     */
+    private int $position = 0;
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
 
     /**
      * @return string|null
@@ -67,9 +93,9 @@ class FieldConfig
 
     /**
      * @param string|null $label
-     * @return FieldConfig
+     * @return $this
      */
-    public function setLabel(?string $label): FieldConfig
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
         return $this;
@@ -85,9 +111,9 @@ class FieldConfig
 
     /**
      * @param string|null $type
-     * @return FieldConfig
+     * @return $this
      */
-    public function setType(?string $type): FieldConfig
+    public function setType(?string $type): self
     {
         $this->type = $type;
         return $this;
@@ -103,9 +129,9 @@ class FieldConfig
 
     /**
      * @param OperatorInterface[] $operators
-     * @return FieldConfig
+     * @return $this
      */
-    public function setOperators(array $operators): FieldConfig
+    public function setOperators(array $operators): self
     {
         $this->operators = $operators;
         return $this;
@@ -115,7 +141,7 @@ class FieldConfig
      * @param OperatorInterface $operator
      * @return $this
      */
-    public function addOperator(OperatorInterface $operator): FieldConfig
+    public function addOperator(OperatorInterface $operator): self
     {
         $usedOperators = array_map(function (OperatorInterface $operator) {
             return $operator->getValue();
@@ -131,7 +157,7 @@ class FieldConfig
      * @param OperatorInterface $operator
      * @return $this
      */
-    public function removeOperator(OperatorInterface $operator): FieldConfig
+    public function removeOperator(OperatorInterface $operator): self
     {
         $usedOperators = array_map(function (OperatorInterface $operator) {
             return $operator->getValue();
@@ -153,9 +179,9 @@ class FieldConfig
 
     /**
      * @param string|null $optionName
-     * @return FieldConfig
+     * @return $this
      */
-    public function setOptionName(?string $optionName): FieldConfig
+    public function setOptionName(?string $optionName): self
     {
         $this->optionName = $optionName;
         return $this;
@@ -171,9 +197,9 @@ class FieldConfig
 
     /**
      * @param bool $multiple
-     * @return FieldConfig
+     * @return $this
      */
-    public function setMultiple(bool $multiple): FieldConfig
+    public function setMultiple(bool $multiple): self
     {
         $this->multiple = $multiple;
         return $this;
@@ -189,9 +215,9 @@ class FieldConfig
 
     /**
      * @param bool $multiselect
-     * @return FieldConfig
+     * @return $this
      */
-    public function setMultiselect(bool $multiselect): FieldConfig
+    public function setMultiselect(bool $multiselect): self
     {
         $this->multiselect = $multiselect;
         return $this;
@@ -207,9 +233,9 @@ class FieldConfig
 
     /**
      * @param bool $available
-     * @return FieldConfig
+     * @return $this
      */
-    public function setAvailable(bool $available): FieldConfig
+    public function setAvailable(bool $available): self
     {
         $this->available = $available;
         return $this;
@@ -225,9 +251,9 @@ class FieldConfig
 
     /**
      * @param bool $filterable
-     * @return FieldConfig
+     * @return $this
      */
-    public function setFilterable(bool $filterable): FieldConfig
+    public function setFilterable(bool $filterable): self
     {
         $this->filterable = $filterable;
         return $this;
@@ -243,9 +269,9 @@ class FieldConfig
 
     /**
      * @param bool $sortable
-     * @return FieldConfig
+     * @return $this
      */
-    public function setSortable(bool $sortable): FieldConfig
+    public function setSortable(bool $sortable): self
     {
         $this->sortable = $sortable;
         return $this;
@@ -261,11 +287,29 @@ class FieldConfig
 
     /**
      * @param bool $required
-     * @return FieldConfig
+     * @return $this
      */
-    public function setRequired(bool $required): FieldConfig
+    public function setRequired(bool $required): self
     {
         $this->required = $required;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     * @return $this
+     */
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
         return $this;
     }
 
@@ -275,6 +319,7 @@ class FieldConfig
     public function toArray(): array
     {
         return [
+            'name' => $this->getName(),
             'label' => $this->getLabel(),
             'type' => $this->getType(),
             'operators' => array_map(function (OperatorInterface $operator) {

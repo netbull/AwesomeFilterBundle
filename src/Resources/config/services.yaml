@@ -1,0 +1,2 @@
+services:
+    NetBull\AwesomeFilterBundle\Manager\AwesomeFilterManager:

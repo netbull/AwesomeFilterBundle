@@ -7,10 +7,6 @@ use InvalidArgumentException;
 use NetBull\AwesomeFilterBundle\Constants\AwesomeFilterConstants;
 use NetBull\AwesomeFilterBundle\Operators;
 
-/**
- * Trait AwesomeFilterTrait
- * @package NetBull\AwesomeFilterBundle\ORM
- */
 trait AwesomeFilterTrait
 {
     /**
