@@ -114,8 +114,11 @@ class FieldConfigsChain
      */
     public function toArray(): array
     {
-        return array_map(function ($fieldConfig) {
-            return $fieldConfig->toArray();
-        }, $this->getSortedFieldConfigs());
+        $output = [];
+        foreach ($this->getSortedFieldConfigs() as $fieldConfig) {
+            $output[$fieldConfig->getName()] = $fieldConfig->toArray();
+        }
+
+        return $output;
     }
 }
