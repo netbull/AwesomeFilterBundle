@@ -2,14 +2,8 @@
 
 namespace NetBull\AwesomeFilterBundle\DependencyInjection\Compiler;
 
-use Doctrine\Bundle\DoctrineBundle\Mapping\ClassMetadataFactory;
-use Doctrine\Bundle\DoctrineBundle\Mapping\MappingDriver;
-use Doctrine\ORM\Mapping\ClassMetadataFactory as ORMClassMetadataFactory;
 use NetBull\AwesomeFilterBundle\Manager\AwesomeFilterManager;
-use NetBull\AwesomeFilterBundle\Operators\OperatorInterface;
-use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 

@@ -2,8 +2,6 @@
 
 namespace NetBull\AwesomeFilterBundle\ORM;
 
-use Carbon\Carbon;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use NetBull\AwesomeFilterBundle\Operators;
@@ -24,7 +22,7 @@ trait AwesomeFilterTrait
             try {
                 $column = $this->getColumnNameByField($filter['field'], $filter);
                 $this->addFilter($qb, $i, $filter['operator'], $column, $filter['value']);
-            } catch (InvalidArgumentException $e) {}
+            } catch (InvalidArgumentException) {}
         }
     }
 
@@ -106,7 +104,7 @@ trait AwesomeFilterTrait
      * @param string $alias
      * @return void
      */
-    public function ensureAlias(QueryBuilder $qb, string $join, string $alias)
+    public function ensureAlias(QueryBuilder $qb, string $join, string $alias): void
     {
         if (in_array($alias, $qb->getAllAliases())) {
             return;

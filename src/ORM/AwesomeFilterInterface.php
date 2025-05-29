@@ -3,6 +3,7 @@
 namespace NetBull\AwesomeFilterBundle\ORM;
 
 use Doctrine\ORM\QueryBuilder;
+use InvalidArgumentException;
 
 interface AwesomeFilterInterface
 {

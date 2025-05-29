@@ -5,12 +5,12 @@ namespace NetBull\AwesomeFilterBundle\Operators;
 abstract class BaseOperator implements OperatorInterface
 {
     /**
-     * @var string|null
+     * @var string
      */
     private string $label;
 
     /**
-     * @var string|null
+     * @var string 
      */
     private string $value;
 

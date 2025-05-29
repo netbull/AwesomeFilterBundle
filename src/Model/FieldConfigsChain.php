@@ -26,7 +26,7 @@ class FieldConfigsChain
 
         $this->fieldConfigs = [];
         foreach ($fieldConfigs as $fieldConfig) {
-            $this->addFieldConfig($fieldConfig->getName(), $fieldConfig);
+            $this->addFieldConfig($fieldConfig);
         }
 
         return $this;

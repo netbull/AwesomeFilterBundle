@@ -18,7 +18,7 @@ class FieldConfig
     private ?string $label;
 
     /**
-     * @var string|null
+     * @var string
      */
     private string $type = FieldConstants::TYPE_TEXT;
 
